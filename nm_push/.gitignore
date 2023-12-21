@@ -1,0 +1,10 @@
+.DS_Store
+*.a
+*.gch
+*.out
+*.txt
+.vscode
+*.json
+*.o
+push_swap
+checker
