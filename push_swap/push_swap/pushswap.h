@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:20:47 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/16 20:02:48 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/01/22 15:56:42 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ char			**ft_split(char const *s, char c);
 
 t_stack_node	*ft_lstlast(t_stack_node *lst);
 void			ft_lstadd_front(t_stack_node **lst, t_stack_node *new);
-void			ft_lstadd_back(t_stack_node **lst, t_stack_node *new);
-int				ft_lstsize(t_stack_node *lst);
+void			ft_lstadd_back(t_stack_node **lst, int nbr);
 t_stack_node	*ft_lstnew(void *value);
 
 //		stack utils
@@ -67,6 +66,7 @@ t_stack_node	*find_highest(t_stack_node *stack);
 t_stack_node	*find_lowest(t_stack_node *stack);
 bool			is_sorted(t_stack_node *stack);
 int				get_stack_len(t_stack_node *stack);
+bool			init_stack(t_stack_node **a, char *argv[]);
 
 //		sorting algorihthms
 

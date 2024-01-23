@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*   stack_utils_libft.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:33:57 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/12 12:59:08 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/01/22 15:56:15 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,29 @@ t_stack_node	*ft_lstlast(t_stack_node *lst)
 	return (lst);
 }
 
-t_stack_node	*ft_lstnew(void *value)
+void	ft_lstadd_back(t_stack_node **lst, int nbr)
 {
-	t_stack_node	*new;
+	t_stack_node	*node;
+	t_stack_node	*last_node;
 
-	new = (t_stack_node *)malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new -> value = value;
-	new -> next = (NULL);
-	return (new);
-}
-
-int	ft_lstsize(t_stack_node *lst)
-{
-	while (lst != NULL)
-		return (1 + ft_lstsize(lst->next));
-	return (0);
-}
-
-void	ft_lstadd_back(t_stack_node **lst, t_stack_node *new)
-{
-	t_stack_node	*current;
-
-	current = *lst;
-	if (!*lst)
-	{
-		*lst = new;
+	if (NULL == lst)
 		return ;
-	}
-	while (current -> next != NULL)
+	node = malloc(sizeof(t_stack_node));
+	if (!node)
+		return ;
+	node->next = NULL;
+	node->value = nbr;
+	if (*lst == NULL)
 	{
-		current = current -> next;
+		*lst = node;
+		node->previous = NULL;
 	}
-	current -> next = new;
+	else
+	{
+		last_node = ft_lstlast(*lst);
+		last_node->next = node;
+		node->previous = last_node;
+	}
 }
 
 void	ft_lstadd_front(t_stack_node **lst, t_stack_node *new)

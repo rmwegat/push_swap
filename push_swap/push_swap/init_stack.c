@@ -6,13 +6,13 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 23:06:06 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/16 19:38:00 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/01/22 15:59:27 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-static long	atol(const char *str)
+static long	ft_atol(const char *str)
 {
 	long	nbr;
 	int		polarization;
@@ -38,19 +38,18 @@ static long	atol(const char *str)
 	return (nbr * polarization);
 }
 
-bool	init_stack(t_stack_node **a, int *argv[])
+bool	init_stack(t_stack_node **a, char *argv[])
 {
 	long			nbr;
 	int				i;
-	t_stack_node	*new_node;
 
 	i = 0;
 	while (argv[i])
 	{
-		nbr = atol(argv[i]);
-		new_node = ft_lstnew(nbr);
-		ft_lstadd_back(a, new_node);
+		nbr = ft_atol(argv[i]);
+		ft_lstadd_back(a, (int)nbr);
 		i++;
 	}
+	return (true);
 }
 //no error handling

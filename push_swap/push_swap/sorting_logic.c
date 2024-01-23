@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:35 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/16 20:44:35 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/01/22 16:03:18 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 		current_node = a;
 		while (current_node)
 		{
-			if (current_node->value > b->value && current_node < best_matching_value)
+			if (current_node->value > b->value && current_node->value < best_matching_value)
 			{
 				best_matching_value = current_node->value;
 				target_node = current_node;
@@ -99,6 +99,6 @@ void nodes_init(t_stack_node *a, t_stack_node *b)
 	give_current_position(b);
 	set_target_node(a, b);
 	set_push_price(a, b);
-	set_cheapest;
+	set_cheapest(b);
 }
 
