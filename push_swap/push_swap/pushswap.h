@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 11:20:47 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/22 15:56:42 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:47:50 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct s_stack_node
 	int					value;
 	int					current_position;
 	int					push_price;
-	bool				cheapest;
+	bool				is_cheapest;
 	bool				above_middle;
 	struct s_stack_node	*next;
 	struct s_stack_node	*previous;
@@ -62,18 +62,23 @@ t_stack_node	*ft_lstnew(void *value);
 
 //		stack utils
 
-t_stack_node	*find_highest(t_stack_node *stack);
-t_stack_node	*find_lowest(t_stack_node *stack);
+t_stack_node	*get_highest(t_stack_node *stack);
+t_stack_node	*get_lowest(t_stack_node *stack);
+t_stack_node	*get_cheapest(t_stack_node *stack);
 bool			is_sorted(t_stack_node *stack);
 int				get_stack_len(t_stack_node *stack);
 bool			init_stack(t_stack_node **a, char *argv[]);
+void			set_current_position(t_stack_node *stack);
 
-//		sorting algorihthms
+//		for sorting
 
 void			push_swap(t_stack_node **a, t_stack_node **b);
 void			sort_3(t_stack_node **a);
-void			sort_5(t_stack_node **a, t_stack_node **b);
+void			init_nodes(t_stack_node *a, t_stack_node *b);
+void			do_cheapest_push(t_stack_node **a, t_stack_node **b);
 
 //		error handling
+
+void			free_stack(t_stack_node **stack);
 
 #endif

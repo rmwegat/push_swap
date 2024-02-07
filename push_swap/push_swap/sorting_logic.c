@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 19:45:35 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/22 16:03:18 by rwegat           ###   ########.fr       */
+/*   Updated: 2024/02/07 18:49:42 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 	t_stack_node	*current_node;
 	t_stack_node	*target_node;
 	long			best_matching_value;
-	
+
 	while (b)
 	{
 		best_matching_value = LONG_MAX;
 		current_node = a;
 		while (current_node)
 		{
-			if (current_node->value > b->value && current_node->value < best_matching_value)
+			if (current_node->value > b->value \
+				&& current_node->value < best_matching_value)
 			{
 				best_matching_value = current_node->value;
 				target_node = current_node;
@@ -32,27 +33,28 @@ void	set_target_node(t_stack_node *a, t_stack_node *b)
 			current_node = current_node->next;
 		}
 		if (best_matching_value == LONG_MAX)
-			b->target_node = find_lowest(a);
+			b->target_node = get_lowest(a);
 		else
 			b->target_node = target_node;
 		b = b->next;
 	}
 }
-void	give_current_position(t_stack_node *stack)
+
+void	set_current_position(t_stack_node *stack)
 {
 	int	i;
-	int	center;
+	int	middle;
 
 	i = 0;
 	if (!stack)
 		return ;
-	center = get_stack_len(stack) / 2;
+	middle = get_stack_len(stack) / 2;
 	while (stack)
 	{
 		stack->current_position = i;
-		if (i <= center)
+		if (i <= middle)
 			stack->above_middle = true;
-		else if (i >= center)
+		else if (i >= middle)
 			stack->above_middle = false;
 		stack = stack->next;
 		i++;
@@ -62,7 +64,7 @@ void	give_current_position(t_stack_node *stack)
 void	set_push_price(t_stack_node *a, t_stack_node *b)
 {
 	int	stacklen_a;
-	int stacklen_b;
+	int	stacklen_b;
 
 	stacklen_a = get_stack_len(a);
 	stacklen_b = get_stack_len(b);
@@ -79,26 +81,31 @@ void	set_push_price(t_stack_node *a, t_stack_node *b)
 	}
 }
 
-t_stack_node	*set_cheapest(t_stack_node *stack)
+void	set_cheapest(t_stack_node *stack)
 {
 	t_stack_node	*cheapest;
+	long			lowest_price;
 
-	cheapest = stack;
+	if (!stack)
+		return ;
+	lowest_price = LONG_MAX;
 	while (stack)
 	{
-		if (stack->push_price < cheapest->push_price)
+		if (stack->push_price < lowest_price)
+		{
+			lowest_price = stack->push_price;
 			cheapest = stack;
+		}
 		stack = stack->next;
 	}
-	return (cheapest);
+	cheapest->is_cheapest = true;
 }
 
-void nodes_init(t_stack_node *a, t_stack_node *b)
+void	init_nodes(t_stack_node *a, t_stack_node *b)
 {
-	give_current_position(a);
-	give_current_position(b);
+	set_current_position(a);
+	set_current_position(b);
 	set_target_node(a, b);
 	set_push_price(a, b);
 	set_cheapest(b);
 }
-
