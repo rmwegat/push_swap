@@ -5,45 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 16:04:28 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/10 16:18:23 by rwegat           ###   ########.fr       */
+/*   Created: 2026/03/13 15:00:00 by rmwegat           #+#    #+#             */
+/*   Updated: 2026/03/13 12:56:27 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "push_swap.h"
 
-void	push(t_stack_node **src, t_stack_node **dest)
+static void	push(t_stack **src, t_stack **dest)
 {
-	t_stack_node	*temp;
+	t_stack	*tmp;
 
-	if (*src == NULL)
+	if (!*src)
 		return ;
-	temp = *src;
+	tmp = *src;
 	*src = (*src)->next;
-	if (*src)
-		(*src)->previous = NULL;
-	temp->previous = NULL;
-	if (*dest == NULL)
-	{
-		*dest = temp;
-		temp->next = NULL;
-	}
-	else
-	{
-		temp->next = *dest;
-		temp->next->previous = temp;
-		*dest = temp;
-	}
+	tmp->next = *dest;
+	*dest = tmp;
 }
 
-void	p_to_a(t_stack_node **a, t_stack_node **b)
+void	pa(t_stack **a, t_stack **b)
 {
 	push(b, a);
-	write (1, "pa\n", 3);
+	ft_printf("pa\n");
 }
 
-void	p_to_b(t_stack_node **a, t_stack_node **b)
+void	pb(t_stack **a, t_stack **b)
 {
 	push(a, b);
-	write (1, "pa\n", 3);
+	ft_printf("pb\n");
 }

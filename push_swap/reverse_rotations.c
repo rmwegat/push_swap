@@ -5,44 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 15:58:56 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/10 16:54:07 by rwegat           ###   ########.fr       */
+/*   Created: 2026/03/13 15:00:00 by rmwegat           #+#    #+#             */
+/*   Updated: 2026/03/13 12:56:27 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "push_swap.h"
 
-void	reverse_rotate(t_stack_node **head)
+static void	reverse_rotate(t_stack **stack)
 {
-	t_stack_node	*last_node;
-	t_stack_node	*temp;
+	t_stack	*first;
+	t_stack	*last;
+	t_stack	*before_last;
 
-	if (*head == NULL || (*head)->next == NULL)
+	if (!*stack || !(*stack)->next)
 		return ;
-	last_node = ft_lstlast(*head);
-	temp = last_node->previous;
-	temp->next = NULL;
-	last_node->previous = NULL;
-	last_node->next = *head;
-	(*head)->previous = last_node;
-	*head = last_node;
+	first = *stack;
+	last = get_stack_bottom(*stack);
+	before_last = get_stack_before_bottom(*stack);
+	before_last->next = NULL;
+	last->next = first;
+	*stack = last;
 }
 
-void	rra(t_stack_node **a)
-{
-	reverse_rotate (a);
-	write(1, "rra\n", 3);
-}
-
-void	rrb(t_stack_node **b)
-{
-	reverse_rotate (b);
-	write(1, "rrb\n", 3);
-}
-
-void	rrr(t_stack_node **a, t_stack_node **b)
+void	rra(t_stack **a)
 {
 	reverse_rotate(a);
-	reverse_rotate (b);
-	write(1, "rrr\n", 3);
+	ft_printf("rra\n");
+}
+
+void	rrb(t_stack **b)
+{
+	reverse_rotate(b);
+	ft_printf("rrb\n");
+}
+
+void	rrr(t_stack **a, t_stack **b)
+{
+	reverse_rotate(a);
+	reverse_rotate(b);
+	ft_printf("rrr\n");
 }

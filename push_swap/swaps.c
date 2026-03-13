@@ -5,44 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 15:02:55 by rwegat            #+#    #+#             */
-/*   Updated: 2024/01/10 16:02:36 by rwegat           ###   ########.fr       */
+/*   Created: 2026/03/13 15:00:00 by rmwegat           #+#    #+#             */
+/*   Updated: 2026/03/13 12:56:27 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pushswap.h"
+#include "push_swap.h"
 
-static void	swap(t_stack_node **head)
+static void	swap(t_stack **stack)
 {
-	t_stack_node	*temp;
+	t_stack	*first;
+	t_stack	*second;
 
-	if (*head == NULL || head == NULL || (*head)->next == NULL)
+	if (!*stack || !(*stack)->next)
 		return ;
-	temp = (*head)->next;
-	(*head)->next = temp->next;
-	(*head)->previous = temp;
-	if (temp->next != NULL)
-		temp->next->previous = *head;
-	temp->next = *head;
-	temp->previous = NULL;
-	*head = temp;
+	first = *stack;
+	second = (*stack)->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
 }
 
-void	sa(t_stack_node **a)
+void	sa(t_stack **a)
 {
 	swap(a);
-	write (1, "sa\n", 3);
+	ft_printf("sa\n");
 }
 
-void	sb(t_stack_node **b)
+void	sb(t_stack **b)
 {
 	swap(b);
-	write (1, "sa\n", 3);
+	ft_printf("sb\n");
 }
 
-void	ss(t_stack_node **a, t_stack_node **b)
+void	ss(t_stack **a, t_stack **b)
 {
 	swap(a);
 	swap(b);
-	write (1, "ss\n", 3);
+	ft_printf("ss\n");
 }
