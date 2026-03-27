@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:25:09 by rwegat            #+#    #+#             */
-/*   Updated: 2026/03/27 14:10:32 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/03/27 14:54:42 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ void	ft_error(t_list **alloc_list)
 	exit(1);
 }
 
-// ARG=$(shuf -i 1-100 -n 100 | tr '\n' ' '); echo "$ARG" > input; ./push_swap $ARG >> output
-/*
-python3 - <<'PY' | tee input.txt | xargs ./push_swap > output.txt
-import random
-print(' '.join(map(str, random.sample(range(1,501), 500))))
-PY
-*/
 int	main(int argc, char **argv)
 {
 	t_stack	*a;

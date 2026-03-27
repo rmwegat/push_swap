@@ -6,38 +6,64 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:00:00 by rwegat            #+#    #+#             */
-/*   Updated: 2026/03/27 10:00:00 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/03/27 14:40:12 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
 
-static void	push_to_b(t_stack **a, t_stack **b)
+static long	get_max_val(t_stack *stack)
+{
+	long	max;
+
+	max = LONG_MIN;
+	while (stack)
+	{
+		if (stack->value > max)
+			max = stack->value;
+		stack = stack->next;
+	}
+	return (max);
+}
+
+static void	push_chunk(t_stack **a, t_stack **b, long limit)
 {
 	int	size;
-	int	pushed;
 	int	i;
 
 	size = get_stack_size(*a);
-	pushed = 0;
 	i = 0;
-	while (size > 6 && i < size && pushed < size / 2)
+	while (i < size && get_stack_size(*a) > 3)
 	{
-		if ((*a)->index <= size / 2)
-		{
+		if ((*a)->value <= limit)
 			pb(a, b);
-			pushed++;
-		}
 		else
 			ra(a);
 		i++;
 	}
-	while (size - pushed > 3)
+}
+
+static void	push_to_b(t_stack **a, t_stack **b)
+{
+	int		chunks;
+	int		curr;
+	long	min;
+	long	step;
+
+	chunks = 6;
+	if (get_stack_size(*a) <= 100)
+		chunks = 3;
+	min = get_min_node(*a)->value;
+	step = (get_max_val(*a) - min) / chunks;
+	curr = 1;
+	while (curr <= chunks)
 	{
-		pb(a, b);
-		pushed++;
+		push_chunk(a, b, min + (step * curr));
+		curr++;
 	}
+	while (get_stack_size(*a) > 3)
+		pb(a, b);
 }
 
 static void	final_rotation(t_stack **a)
