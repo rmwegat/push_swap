@@ -1,35 +1,66 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
-NAME = push_swap_exec
-SRC_DIR = push_swap
-SRC_FILES = main.c init_stack.c stack_utils.c swaps.c pushes.c rotations.c reverse_rotations.c sort.c
+CFLAGS = -Wall -Wextra -Werror -Iinc
+
+NAME = push_swap
+SRC_DIR = src
+
+SRC_FILES = main.c \
+	commands/pushes.c \
+	commands/reverse_rotations.c \
+	commands/rotations.c \
+	commands/swaps.c \
+	sorter/case_sort.c \
+	sorter/case_sort_utils.c \
+	sorter/case_sort_utils2.c \
+	sorter/sort.c \
+	stack_utils/init_stack.c \
+	stack_utils/stack_utils.c
+
 SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-OBJS = $(SRCS:.c=.o)
-LIBFT_DIR = libft
+OBJS = $(patsubst $(SRC_DIR)/%.c,objs/%.o,$(SRCS))
+
+LIBFT_DIR = inc/libft
 LIBFT = $(LIBFT_DIR)/libft/libft.a
 PRINTF_DIR = $(LIBFT_DIR)/ft_printf
 PRINTF = $(PRINTF_DIR)/libftprintf.a
 
 all: $(NAME)
 
+objs:
+	@mkdir -p objs
+
+objs/%.o: $(SRC_DIR)/%.c | objs
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS) $(LIBFT) $(PRINTF)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
+	@echo "Compiling $(NAME)..."
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) -o $(NAME)
+	@echo "Done."
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@echo "Compiling libft..."
+	@make bonus -C $(LIBFT_DIR)/libft > /dev/null
+	@echo "Done."
 
 $(PRINTF):
-	make -C $(PRINTF_DIR)
+	@echo "Compiling printf..."
+	@make -C $(PRINTF_DIR) > /dev/null
+	@echo "Done."
 
 clean:
-	rm -f $(OBJS)
-	make -C $(LIBFT_DIR) clean
-	make -C $(PRINTF_DIR) clean
+	@echo "Cleaning..."
+	@rm -f $(OBJS)
+	@rm -rf objs
+	@make -C $(LIBFT_DIR)/libft clean > /dev/null
+	@make -C $(PRINTF_DIR) clean > /dev/null
+	@echo "Done."
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
-	make -C $(PRINTF_DIR) fclean
+	@rm -f $(NAME)
+	@rm -rf objs
+	@make -C $(LIBFT_DIR)/libft fclean > /dev/null
+	@make -C $(PRINTF_DIR) fclean > /dev/null
 
 re: fclean all
 
