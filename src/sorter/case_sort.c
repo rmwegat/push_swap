@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   case_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmwegat <rmwegat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/27 10:00:00 by rwegat            #+#    #+#             */
-/*   Updated: 2026/03/27 14:40:12 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/05/12 17:51:50 by rmwegat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 static long	get_max_val(t_stack *stack)
 {

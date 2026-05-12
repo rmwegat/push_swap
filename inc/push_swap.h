@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rmwegat <rmwegat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:25:05 by rwegat            #+#    #+#             */
-/*   Updated: 2026/03/27 13:45:36 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/05/12 17:51:26 by rmwegat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft/libft.h"
 # include "libft/ft_printf/ft_printf.h"
+# include <limits.h>
 
 typedef struct s_stack
 {
