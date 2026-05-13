@@ -6,24 +6,11 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:25:18 by rwegat            #+#    #+#             */
-/*   Updated: 2026/03/19 16:51:14 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/05/13 13:12:41 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static t_stack	*new_node(int value, t_list **alloc_list)
-{
-	t_stack	*node;
-
-	node = ft_malloc(sizeof(t_stack), alloc_list);
-	if (!node)
-		ft_error(alloc_list);
-	node->value = value;
-	node->index = 0;
-	node->next = NULL;
-	return (node);
-}
 
 static void	add_node_back(t_stack **stack, t_stack *node)
 {
@@ -57,6 +44,19 @@ static void	check_duplicates(t_stack *a, t_list **alloc_list)
 		}
 		i = i->next;
 	}
+}
+
+static t_stack	*new_node(int value, t_list **alloc_list)
+{
+	t_stack	*node;
+
+	node = ft_malloc(sizeof(t_stack), alloc_list);
+	if (!node)
+		ft_error(alloc_list);
+	node->value = value;
+	node->index = 0;
+	node->next = NULL;
+	return (node);
 }
 
 static long	ft_atol(const char *str, t_list **alloc_list)
@@ -108,6 +108,7 @@ void	init_stack(t_stack **a, int argc, char **argv, t_list **alloc_list)
 			add_node_back(a, new_node((int)nb, alloc_list));
 			j++;
 		}
+		free_stuff(args);
 		i++;
 	}
 	check_duplicates(*a, alloc_list);

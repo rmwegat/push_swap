@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/19 16:25:05 by rwegat            #+#    #+#             */
-/*   Updated: 2026/05/13 08:48:44 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/05/13 13:13:08 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,7 @@ int		get_stack_size(t_stack *a);
 t_stack	*get_stack_bottom(t_stack *a);
 t_stack	*get_stack_before_bottom(t_stack *a);
 void	assign_index(t_stack *a, int size);
+
+void	free_stuff(char **args);
 
 #endif

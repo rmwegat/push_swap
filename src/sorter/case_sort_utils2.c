@@ -6,7 +6,7 @@
 /*   By: rwegat <rwegat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/13 08:50:25 by rwegat            #+#    #+#             */
-/*   Updated: 2026/05/13 08:50:28 by rwegat           ###   ########.fr       */
+/*   Updated: 2026/05/13 13:12:36 by rwegat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,14 @@ void	execute_moves(t_stack **a, t_stack **b, int cost_a, int cost_b)
 		rb(b);
 	while (cost_b < 0 && cost_b++)
 		rrb(b);
+}
+
+void	free_stuff(char **args)
+{
+	int	j;
+
+	j = 0;
+	while (args[j])
+		free(args[j++]);
+	free(args);
 }
